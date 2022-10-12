@@ -2,7 +2,9 @@
 
 订单管理客户端
 
-## Recommended IDE Setup
+## git
+
+更新git 邮箱 git 用户名 是limo
 
 
 ## Customize configuration
