@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import Icon from './icons/Icon.vue';
 
 //接收参数
 let { 行 } = defineProps({
@@ -12,50 +13,70 @@ let { 行 } = defineProps({
 let 旺旺名显示开关 = ref(false)
 let 姓名显示开关 = ref(false)
 let 下单日显示开关 = ref(false)
-
+let 修改开关 = ref(false)
+if (行.类型 == '新订单') {
+  修改开关.value = true
+}
 
 
 </script>
 
 <template>
-  <div class="行">
-    <input type="text" v-model.lazy="行._id">
+    <div v-if="!修改开关" class = "行"  >
+        <div>{{行.订单号}}</div>
+        <div>{{行.年}}</div>
+        <div>{{行.月}}</div>
+        <div>{{行.日}}</div>
+        <div>{{行.镜片下单日}}</div>
+        <div>{{行.旺旺名}}</div>
+        <div>{{行.收件人}}</div>
+        <div>{{行.镜片}}</div>
+        <div>{{行.右近视}}</div>
+        <div>{{行.右散光}}</div>
+        <div>{{行.右轴向}}</div>
+        <div>{{行.左近视}}</div>
+        <div>{{行.左散光}}</div>
+        <div>{{行.左轴向}}</div>
+        <div>{{行.右瞳距}} {{行.左瞳距}}</div>
+        <div>{{行.备注}}</div>
+        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+   
+        
+        
 
-    <div class="单元格" @mouseleave="旺旺名显示开关 = false">
-      <input type="text" @click="旺旺名显示开关 = true" v-model.lazy="行.旺旺名">
-      <div class="下滑菜单" v-if="旺旺名显示开关">旺旺名显示开关</div>
     </div>
 
-    <div class="单元格" @mouseleave="姓名显示开关 = false">
-      <input type="text" @click="姓名显示开关 = true" v-model.lazy="行.收件人">
-      <div class="下滑菜单" v-if="姓名显示开关">
-        <div>姓名显示开关</div>
-        <div>姓名显示开关</div>
-        <div>姓名显示开关</div>
-        <div>姓名显示开关</div>
-      </div>
-    </div>
 
-    <div class="单元格">
-      <input type="text" @click="下单日显示开关 = !下单日显示开关" v-model.lazy="行.镜片下单日">
-      <div class="下滑菜单" v-if="下单日显示开关">
-        <div>姓名显示开关</div>
-        <div>姓名显示开关</div>
-        <div>姓名显示开关</div>
-        <div>姓名显示开关</div>
-      </div>
-    </div>
 
-    <input type="text" v-model.lazy="行.镜片">
-    <input type="text" v-model.lazy="行.右近视">
-    <input type="text" v-model.lazy="行.右散光">
-    <input type="text" v-model.lazy="行.右轴向">
-    <input type="text" v-model.lazy="行.左近视">
-    <input type="text" v-model.lazy="行.左散光">
-    <input type="text" v-model.lazy="行.左轴向">
-    <input type="text" v-model.lazy="行.备注">
 
-  </div>
+
+ <div v-if="修改开关" class="行 ">
+
+        <input type="text" v-model.lazy="行.订单号">
+        <input type="text" v-model.lazy="行.年">
+        <input type="text" v-model.lazy="行.月">
+        <input type="text" v-model.lazy="行.日">
+        <input type="text" v-model.lazy="行.镜片下单日">
+        <input type="text" v-model.lazy="行.旺旺名">
+        <input type="text" v-model.lazy="行.收件人">
+        <input type="text" v-model.lazy="行.镜片">
+        <input type="text" v-model.lazy="行.右近视">
+        <input type="text" v-model.lazy="行.右散光">
+        <input type="text" v-model.lazy="行.右轴向">
+        <input type="text" v-model.lazy="行.左近视">
+        <input type="text" v-model.lazy="行.左散光">
+        <input type="text" v-model.lazy="行.左轴向">
+        <input type="text" v-model.lazy="行.右瞳距">
+        <input type="text" v-model.lazy="行.备注">
+        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+
+  </div> 
 </template>
 
 
@@ -63,15 +84,10 @@ let 下单日显示开关 = ref(false)
 .行 {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: repeat(5, 1fr) repeat(6, 50px)  1fr;
+  grid-template-columns: 100px repeat(3, 30px) 100px 200px 120px 170px repeat(6, 60px) 80px 1fr;
   grid-template-rows: 25px;
   align-content: flex-start;
   background-color: #F0F2F5
-
-
-
-
-
 
   /* display: grid;
   width: 100%;
@@ -93,6 +109,17 @@ input {
   border-radius: 5px;
   background-color: #F0F2F5;
   margin: 0;
+}
+
+div {
+
+box-sizing: border-box;
+width: 100%;
+height: 100%;
+border: 0.5px solid rgb(225, 225, 225);
+border-radius: 5px;
+background-color: #F0F2F5;
+margin: 0;
 }
 
 input[type="text"] {

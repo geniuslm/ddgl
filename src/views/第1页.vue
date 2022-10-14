@@ -14,7 +14,7 @@ let pinia = pinia数据中心()
 
         <icon 图标名="icon-delete" 颜色="#666" font-size='100px' />
         <icon 图标名="icon-home" color="#666" />
-        <icon 图标名="lmicon" 颜色="#666" />
+        <icon 图标名="icon-plus-circle-fill" 颜色="#666" />
 
 
 

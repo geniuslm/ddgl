@@ -18,8 +18,6 @@ let 删除用户 = (行: any) => {
     console.log(返回数据)
     pinia.获取用户()
   });
-
-
 }
 
 </script>

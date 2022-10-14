@@ -8,6 +8,7 @@ import { storeToRefs } from 'pinia'
 
 
 let pinia = pinia数据中心();
+pinia.获取旧订单();
 
 
 //监控pinia
@@ -31,13 +32,13 @@ let pinia = pinia数据中心();
             <input type="text" v-model="pinia.要搜索的值" @focus="pinia.行的属性 = '全局'" @input="pinia.当前页 = 1">
             <input v-model.lazy="pinia.旧订单每页显示的数量">
             <lmButton>一共有 {{ pinia.通过筛选的数量 }} 条数据通过筛选</lmButton>
-            <lmButton>当前显示 {{ pinia.要显示的订单.length }} 条数据</lmButton>
+            <lmButton>当前显示 {{ pinia.显示的订单.length }} 条数据</lmButton>
         </div>
         <div>{{ pinia.旧订单搜索属性与值 }}</div>
         <div> {{ pinia.旧订单的所有属性 }}</div>
         <div class="表格">
             <lmSH></lmSH>
-            <lmInput v-for="行 in pinia.要显示的订单" :行=行></lmInput>
+            <lmInput v-for="行 in pinia.显示的订单" :行=行></lmInput>
         </div>
         <div class="分页整体">
             <lmButton class="分页按钮"> 这是第{{ pinia.当前页 }}页</lmButton>

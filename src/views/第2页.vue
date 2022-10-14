@@ -3,6 +3,7 @@ import { pinia数据中心 } from '../stores/pinia数据';
 import lmButton from "@组件/按钮.vue";
 
 let pinia = pinia数据中心();
+pinia.获取旧订单();
 
 
 </script>
@@ -10,6 +11,8 @@ let pinia = pinia数据中心();
 <template>
     <div>
         <h1>这是第二页</h1>
+
+
 
     </div>
 </template>
