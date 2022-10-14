@@ -18,7 +18,16 @@ let 姓名显示开关 = ref(false)
 let 下单日显示开关 = ref(false)
 let 修改开关 = ref(false)
 if (行.类型 == '新订单') {
-  修改开关.value = true
+  修改开关.value = true;
+  let date = new Date()                                                                        //获取日期与时间
+  let 日期 = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()           //获取日期与时间
+  let 时间 = ref(date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds())          //获取日期与时间
+  let month = ("0" + (date.getMonth() + 1)).slice(-2)
+  行.年 = date.getFullYear().toString().slice(2)
+  行.月 = ("0" + (date.getMonth() + 1)).slice(-2)
+  行.日 = ("0" + date.getDate()).slice(-2)
+  行.备注 = date.getFullYear().toString().slice(2) + ("0" + (date.getMonth() + 1)).slice(-2)+("0" + date.getDate()).slice(-2)
+
 }
 
 let 修改订单 = (行: any) => {
@@ -27,69 +36,67 @@ let 修改订单 = (行: any) => {
   });
   console.log('修改订单');
   pinia.获取旧订单();
-  修改开关.value=!修改开关.value
+  修改开关.value = !修改开关.value
 }
 
 
 </script>
 
 <template>
-    <div v-if="!修改开关" class = "行"  >
-        <div>{{行.订单号}}</div>
-        <div>{{行.年}}</div>
-        <div>{{行.月}}</div>
-        <div>{{行.日}}</div>
-        <div>{{行.镜片下单日}}</div>
-        <div>{{行.旺旺名}}</div>
-        <div>{{行.收件人}}</div>
-        <div>{{行.镜片}}</div>
-        <div>{{行.右近视}}</div>
-        <div>{{行.右散光}}</div>
-        <div>{{行.右轴向}}</div>
-        <div>{{行.左近视}}</div>
-        <div>{{行.左散光}}</div>
-        <div>{{行.左轴向}}</div>
-        <div>{{行.右瞳距}}+{{行.左瞳距}} </div>
+  <div v-if="!修改开关" class="行">
+    <div>{{行.订单号}}</div>
+    <div>{{行.年}}</div>
+    <div>{{行.月}}</div>
+    <div>{{行.日}}</div>
+    <div>{{行.镜片下单日}}</div>
+    <div>{{行.旺旺名}}</div>
+    <div>{{行.收件人}}</div>
+    <div>{{行.镜片}}</div>
+    <div>{{行.右近视}}</div>
+    <div>{{行.右散光}}</div>
+    <div>{{行.右轴向}}</div>
+    <div>{{行.左近视}}</div>
+    <div>{{行.左散光}}</div>
+    <div>{{行.左轴向}}</div>
+    <div>{{行.右瞳距}}+{{行.左瞳距}} </div>
 
-        <div>{{行.备注}}</div>
-        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
-        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
-        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
-        <icon  @click="修改开关=!修改开关"   图标名="icon-setting" 颜色="#666" font-size='25px' />
-   
-        
-        
-
-    </div>
+    <div>{{行.备注}}</div>
+    <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+    <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+    <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+    <icon @click="修改开关=!修改开关" 图标名="icon-setting" 颜色="#666" font-size='25px' />
 
 
 
 
+  </div>
 
- <div v-if="修改开关" class="行 ">
 
-        <input type="text" v-model.lazy="行.订单号">
-        <input type="text" v-model.lazy="行.年">
-        <input type="text" v-model.lazy="行.月">
-        <input type="text" v-model.lazy="行.日">
-        <input type="text" v-model.lazy="行.镜片下单日">
-        <input type="text" v-model.lazy="行.旺旺名">
-        <input type="text" v-model.lazy="行.收件人">
-        <input type="text" v-model.lazy="行.镜片">
-        <input type="text" v-model.lazy="行.右近视">
-        <input type="text" v-model.lazy="行.右散光">
-        <input type="text" v-model.lazy="行.右轴向">
-        <input type="text" v-model.lazy="行.左近视">
-        <input type="text" v-model.lazy="行.左散光">
-        <input type="text" v-model.lazy="行.左轴向">
-        <input type="text" v-model.lazy="行.瞳距">
-        <input type="text" v-model.lazy="行.备注">
-        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
-        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
-        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
-        <icon @click="修改订单(行)"  图标名="icon-cloud-upload" 颜色="#666" font-size='25px' />
 
-  </div> 
+
+
+  <div v-if="修改开关" class="行 ">
+
+    <input type="text" v-model.lazy="行.订单号">
+    <input type="text" v-model.lazy="行.年">
+    <input type="text" v-model.lazy="行.月">
+    <input type="text" v-model.lazy="行.日">
+    <input type="text" v-model.lazy="行.镜片下单日">
+    <input type="text" v-model.lazy="行.旺旺名">
+    <input type="text" v-model.lazy="行.收件人">
+    <input type="text" v-model.lazy="行.镜片">
+    <input type="text" v-model.lazy="行.右近视">
+    <input type="text" v-model.lazy="行.右散光">
+    <input type="text" v-model.lazy="行.右轴向">
+    <input type="text" v-model.lazy="行.左近视">
+    <input type="text" v-model.lazy="行.左散光">
+    <input type="text" v-model.lazy="行.左轴向">
+    <input type="text" v-model.lazy="行.瞳距">
+    <input type="text" v-model.lazy="行.备注">
+
+    <icon @click="修改订单(行)" 图标名="icon-cloud-upload" 颜色="#666" font-size='25px' />
+
+  </div>
 </template>
 
 
@@ -101,8 +108,7 @@ let 修改订单 = (行: any) => {
   grid-template-rows: 25px;
   align-content: flex-start;
   background-color: #F0F2F5
-
-  /* display: grid;
+    /* display: grid;
   width: 100%;
   grid-auto-flow: column;
   align-content: flex-start;
@@ -126,13 +132,13 @@ input {
 
 div {
 
-box-sizing: border-box;
-width: 100%;
-height: 100%;
-border: 0.5px solid rgb(225, 225, 225);
-border-radius: 5px;
-background-color: #F0F2F5;
-margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border: 0.5px solid rgb(225, 225, 225);
+  border-radius: 5px;
+  background-color: #F0F2F5;
+  margin: 0;
 }
 
 input[type="text"] {
