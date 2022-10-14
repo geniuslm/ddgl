@@ -24,7 +24,7 @@ let 属性与值 = pinia.旧订单搜索属性与值
     <input type="text" :class="{ 查找状态: 属性与值[2].值 !== '' }" v-model.lazy="属性与值[2].值" :placeholder=属性与值[2].属性>
     <input type="text" :class="{ 查找状态: 属性与值[3].值 !== '' }" v-model.lazy="属性与值[3].值" :placeholder=属性与值[3].属性>
     <input type="text" :class="{ 查找状态: 属性与值[4].值 !== '' }" v-model.lazy="属性与值[4].值" :placeholder=属性与值[4].属性>
-    <input type="text" :class="{ 查找状态: pinia.属性搜索.旺旺名 !== '' }" v-model.lazy="pinia.属性搜索.旺旺名" :placeholder=Object.keys(pinia.属性搜索)[6]>
+    <input type="text" :class="{ 查找状态: 属性与值[5].值 !== '' }" v-model.lazy="属性与值[5].值" :placeholder=属性与值[5].属性>
     <input type="text" :class="{ 查找状态: 属性与值[6].值 !== '' }" v-model.lazy="属性与值[6].值" :placeholder=属性与值[6].属性>
     <input type="text" :class="{ 查找状态: 属性与值[7].值 !== '' }" v-model.lazy="属性与值[7].值" :placeholder=属性与值[7].属性>
     <input type="text" :class="{ 查找状态: 属性与值[8].值 !== '' }" v-model.lazy="属性与值[8].值" :placeholder=属性与值[8].属性>
@@ -34,7 +34,8 @@ let 属性与值 = pinia.旧订单搜索属性与值
     <input type="text" :class="{ 查找状态: 属性与值[12].值 !== '' }" v-model.lazy="属性与值[12].值" :placeholder=属性与值[12].属性>
     <input type="text" :class="{ 查找状态: 属性与值[13].值 !== '' }" v-model.lazy="属性与值[13].值" :placeholder=属性与值[13].属性>
     <input type="text" :class="{ 查找状态: 属性与值[14].值 !== '' }" v-model.lazy="属性与值[14].值" :placeholder=属性与值[14].属性>
-    <input type="text" :class="{ 查找状态: pinia.属性搜索.备注 !== '' }" v-model.lazy="pinia.属性搜索.备注" :placeholder=Object.keys(pinia.属性搜索)[16]>
+    <input type="text" :class="{ 查找状态: 属性与值[15].值 !== '' }" v-model.lazy="属性与值[15].值" :placeholder=属性与值[15].属性>
+
 
   
 
@@ -55,7 +56,7 @@ let 属性与值 = pinia.旧订单搜索属性与值
 .行 {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 100px repeat(3, 30px) 100px 200px 120px 170px repeat(6, 60px) 80px 1fr;
+  grid-template-columns: 100px repeat(3, 30px) 100px 200px 120px 170px repeat(6, 60px) 100px 1fr;
   grid-template-rows: 25px;
   align-content: flex-start;
   background-color: #F0F2F5

@@ -2,7 +2,10 @@
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import Icon from './icons/Icon.vue';
+import { socket } from "../stores/socket链接";
+import { pinia数据中心 } from '../stores/pinia数据';
 
+let pinia = pinia数据中心();
 //接收参数
 let { 行 } = defineProps({
   行: {
@@ -16,6 +19,15 @@ let 下单日显示开关 = ref(false)
 let 修改开关 = ref(false)
 if (行.类型 == '新订单') {
   修改开关.value = true
+}
+
+let 修改订单 = (行: any) => {
+  socket.emit('修改与添加订单', 行, (返回数据: any) => {
+    console.log(返回数据)
+  });
+  console.log('修改订单');
+  pinia.获取旧订单();
+  修改开关.value=!修改开关.value
 }
 
 
@@ -37,12 +49,13 @@ if (行.类型 == '新订单') {
         <div>{{行.左近视}}</div>
         <div>{{行.左散光}}</div>
         <div>{{行.左轴向}}</div>
-        <div>{{行.右瞳距}} {{行.左瞳距}}</div>
+        <div>{{行.右瞳距}}+{{行.左瞳距}} </div>
+
         <div>{{行.备注}}</div>
         <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
         <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
         <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
-        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+        <icon  @click="修改开关=!修改开关"   图标名="icon-setting" 颜色="#666" font-size='25px' />
    
         
         
@@ -69,12 +82,12 @@ if (行.类型 == '新订单') {
         <input type="text" v-model.lazy="行.左近视">
         <input type="text" v-model.lazy="行.左散光">
         <input type="text" v-model.lazy="行.左轴向">
-        <input type="text" v-model.lazy="行.右瞳距">
+        <input type="text" v-model.lazy="行.瞳距">
         <input type="text" v-model.lazy="行.备注">
         <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
         <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
         <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
-        <icon 图标名="icon-delete" 颜色="#666" font-size='25px' />
+        <icon @click="修改订单(行)"  图标名="icon-cloud-upload" 颜色="#666" font-size='25px' />
 
   </div> 
 </template>
@@ -84,7 +97,7 @@ if (行.类型 == '新订单') {
 .行 {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 100px repeat(3, 30px) 100px 200px 120px 170px repeat(6, 60px) 80px 1fr;
+  grid-template-columns: 100px repeat(3, 30px) 100px 200px 120px 170px repeat(6, 60px) 100px 1fr;
   grid-template-rows: 25px;
   align-content: flex-start;
   background-color: #F0F2F5
