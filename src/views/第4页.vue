@@ -50,7 +50,7 @@ let 添加订单 = (行: any) => {
     <div class="第一行">
       <!--   <div class = "弹窗" v-if = "添加订单窗口开关"> <lmButton @click = "添加订单窗口开关=false">关闭窗口</lmButton></div> -->
       <lmWin v-if="pinia.添加订单窗口开关"></lmWin>
-      <h1>这是第四页</h1>
+      <h1>这是第四页{{pinia.日期}}</h1>
       <input type="text" v-model="pinia.要搜索的值" @focus="pinia.行的属性 = '全局'">
       <lmButton @click="pinia.获取旧订单">获取旧订单</lmButton>
       <input v-model.lazy="pinia.旧订单每页显示的数量">
@@ -58,8 +58,7 @@ let 添加订单 = (行: any) => {
       <lmButton>当前显示 {{ pinia.显示的订单.length }} 条数据</lmButton>
       <lmButton @click="添加订单按钮">添加订单 </lmButton>
     </div>
-    <div>{{ pinia.旧订单搜索属性与值 }}</div>
-    <div> {{ pinia.旧订单的所有属性 }}</div>
+  
 
 
     <div class="表格外">
@@ -71,7 +70,7 @@ let 添加订单 = (行: any) => {
           <icon 图标名="icon-plus-circle-fill" 颜色="#fff" font-size='20px' />
           <p>添加订单</p>
         </lmButton>
-        <p>{{pinia.新订单}}</p>
+        <p>{{pinia.新订单初始化}}</p>
         <lmInput  :行=pinia.新订单 ></lmInput>
       </div>
 
@@ -104,7 +103,7 @@ let 添加订单 = (行: any) => {
   display: grid;
   width: 100%;
   grid-auto-flow: row;
-  grid-template-rows: 50px 50px 50px 1fr auto;
+  grid-template-rows: 50px  1fr auto;
   grid-template-columns: 100%;
   align-content: start;
   align-items: start;
