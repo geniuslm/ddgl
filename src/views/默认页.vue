@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { pinia数据中心 } from '../stores/pinia数据';
-const 菜单 =pinia数据中心().菜单[0];
+
+
 </script>
 
 <template>
 
-   <div>{{菜单}}</div>
+   <div>默认页</div>
 
 </template>
 

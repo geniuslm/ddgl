@@ -2,6 +2,7 @@
 import { pinia数据中心 } from '../stores/pinia数据';
 
 let pinia = pinia数据中心()
+pinia.获取旧订单()
 
 
 
@@ -11,9 +12,14 @@ let pinia = pinia数据中心()
 <template>
     <div>
         <h1>第一页 图标</h1>
-
+  
         <icon 图标名="icon-delete" 颜色="#666" font-size='100px' />
         <icon 图标名="icon-home" color="#666" />
+        <icon 图标名="icon-close-circle" 颜色="#666" />
+        <icon 图标名="icon-plus-circle-fill" 颜色="#666" />
+        <icon 图标名="icon-plus-circle-fill" 颜色="#666" />
+        <icon 图标名="icon-plus-circle-fill" 颜色="#666" />
+        <icon 图标名="icon-plus-circle-fill" 颜色="#666" />
         <icon 图标名="icon-plus-circle-fill" 颜色="#666" />
 
 

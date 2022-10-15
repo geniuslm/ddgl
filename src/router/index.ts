@@ -5,6 +5,10 @@ import 第2页 from '@页面/第2页.vue';
 import 第3页 from '@页面/第3页.vue';
 import 第4页 from '@页面/第4页.vue';
 import 第5页 from '@页面/第5页.vue';
+import 第6页 from '@页面/第6页.vue';
+import 第7页 from '@页面/第7页.vue';
+import 第8页 from '@页面/第8页.vue';
+import 第9页 from '@页面/第9页.vue';
 import 默认页 from '@页面/默认页.vue';
 import 登录页 from '@页面/登录页.vue';
 import { pinia数据中心 } from '../stores/pinia数据';
@@ -65,6 +69,34 @@ const router = createRouter({
                     components: { 内容: 第5页 },
                     props: true
                 },
+                {
+                    path: '6',
+                    name: '第6页',
+                    components: { 内容: 第6页 },
+                    props: true
+                },
+                {
+                    path: '7',
+                    name: '第7页',
+                    components: { 内容: 第7页 },
+                    props: true
+                },
+
+                {
+                    path: '8',
+                    name: '第8页',
+                    components: { 内容: 第8页 },
+                    props: true
+                },
+
+                {
+                    path: '9',
+                    name: '第9页',
+                    components: { 内容: 第9页 },
+                    props: true
+                },
+
+
             ],
         },
 

@@ -41,6 +41,7 @@ let 添加订单 = (行: any) => {
 
 
 
+
 </script>
 
 <template>
@@ -63,7 +64,6 @@ let 添加订单 = (行: any) => {
 
     <div class="表格外">
       <lmSH></lmSH>
-
       <div class="表格">
         <lmInput v-for="行 in pinia.显示的订单" :行=行></lmInput>
         <lmButton @click="添加订单(pinia.新订单)" >

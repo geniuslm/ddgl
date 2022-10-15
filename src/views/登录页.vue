@@ -3,7 +3,7 @@
 import { useRouter } from 'vue-router';
 import { pinia数据中心 } from '@/stores/pinia数据';
 import { socket } from "../stores/socket链接";
-
+import lmButton from "@组件/按钮.vue";
 let pinia = pinia数据中心()
 let router = useRouter()
 
@@ -34,12 +34,12 @@ function 登录() {
 
 socket.on("connect", () => {
     pinia.当前数据库状态 = "已连接"
-    console.log("数据库已连接"); 
+    console.log("数据库已连接");
 
 });
 socket.on("disconnect", () => {
     pinia.当前数据库状态 = "断开连接"
-    console.log("数据库链接断开"); 
+    console.log("数据库链接断开");
 });
 
 
@@ -47,12 +47,33 @@ socket.on("disconnect", () => {
 </script>
 
 <template>
-    <input type="text" placeholder="用户名" v-model.lazy="pinia.当前登录用户">
-    <input type="text" placeholder="密码" v-model.lazy="pinia.密码">
-    <button plain @click="登录">提交</button>
-    <div>当前登录状态{{pinia.当前数据库状态}}</div>
+    <div class="登录页">
+
+        <input type="text" placeholder="用户名" v-model.lazy="pinia.当前登录用户">
+        <input type="text" placeholder="密码" v-model.lazy="pinia.密码">
+        <lmButton plain @click="登录">登录</lmButton>
+        <lmButton :class="{退出登录:pinia.当前数据库状态!='已连接'}"> 服务器 {{pinia.当前数据库状态}}</lmButton>
+
+    </div>
+
+
+
 </template>
 
 
 <style scoped>
+.登录页{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-auto-flow: row;
+    grid-template-rows: auto;
+    align-content: center;
+    align-items: center;
+
+    gap: 10px;
+}
+.退出登录 {
+    background-color: red;
+}
 </style>

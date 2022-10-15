@@ -28,27 +28,9 @@ pinia.获取旧订单();
 <template>
 
     <div class="第五页">
-        <div class="第一行">
-            <input type="text" v-model="pinia.要搜索的值" @focus="pinia.行的属性 = '全局'" @input="pinia.当前页 = 1">
-            <input v-model.lazy="pinia.旧订单每页显示的数量">
-            <lmButton>一共有 {{ pinia.通过筛选的数量 }} 条数据通过筛选</lmButton>
-            <lmButton>当前显示 {{ pinia.显示的订单.length }} 条数据</lmButton>
-        </div>
-        <div>{{ pinia.旧订单搜索属性与值 }}</div>
-        <div> {{ pinia.旧订单的所有属性 }}</div>
-        <div class="表格">
-            <lmSH></lmSH>
-            <lmInput v-for="行 in pinia.显示的订单" :行=行></lmInput>
-        </div>
-        <div class="分页整体">
-            <lmButton class="分页按钮"> 这是第{{ pinia.当前页 }}页</lmButton>
-            <!-- <button v-for="(页, index) in pinia.页数" :key="页" @click='pinia.当前页=pinia.页数[index]'>{{ 页 + 1 }}</button> -->
-            <!-- v-for 循环数组必须有 index 且必须使用 不然循环不了  而且index不能用中文名 -->
-            <div class="分页">
-                <lmButton v-for="(页, index) in pinia.页数" @click="pinia.当前页 = index + 1">{{ 页 }}</lmButton>
-            </div>
-            <lmButton class="分页按钮">一共有{{ pinia.页数 }}页</lmButton>
-        </div>
+        <h1>第八页</h1>
+
+  
 
     </div>
 
