@@ -5,21 +5,14 @@ import lmSH from "@组件/首行.vue";
 import lmButton from "@组件/按钮.vue";
 import lmWin from "@组件/添加订单窗口.vue";
 import { socket } from "../stores/socket链接";
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, toRef } from 'vue';
 
 
 
 
 let pinia = pinia数据中心();
 pinia.获取旧订单();
-// pinia.$subscribe((args: any) => {
-//   if (args.events.key !== "旧订单") {
-//     console.log('id', args.events.target._id)
-//     console.log('key', args.events.key)
-//     console.log('新值', args.events.newValue)
-//     console.log('旧值', args.events.oldValue)
-//   }
-// }, { detached: true })
+
 
 let 添加订单窗口开关 = ref(false)
 let 添加订单按钮 = () => {
@@ -30,15 +23,16 @@ let 添加订单按钮 = () => {
 
 
 
+
+
 let 添加订单 = (行: any) => {
   socket.emit('修改与添加订单', 行, (返回数据: any) => {
     console.log(返回数据)
   });
   console.log('添加订单');
   pinia.获取旧订单();
+  pinia.旧订单当前页 = pinia.旧订单页数
 }
-
-
 
 
 
@@ -52,39 +46,43 @@ let 添加订单 = (行: any) => {
       <!--   <div class = "弹窗" v-if = "添加订单窗口开关"> <lmButton @click = "添加订单窗口开关=false">关闭窗口</lmButton></div> -->
       <lmWin v-if="pinia.添加订单窗口开关"></lmWin>
       <h1>这是第四页{{pinia.日期}}</h1>
-      <input type="text" v-model="pinia.要搜索的值" @focus="pinia.行的属性 = '全局'">
+      <input type="text" v-model="pinia.要全局搜索的值 ">
       <lmButton @click="pinia.获取旧订单">获取旧订单</lmButton>
       <input v-model.lazy="pinia.旧订单每页显示的数量">
       <lmButton>一共有 {{ pinia.通过筛选的数量 }} 条数据通过筛选</lmButton>
-      <lmButton>当前显示 {{ pinia.显示的订单.length }} 条数据</lmButton>
-      <lmButton @click="添加订单按钮">添加订单 </lmButton>
+      <lmButton>当前显示 {{ pinia.筛选过的旧订单.length }} 条数据</lmButton>
+      <lmButton @click="添加订单按钮">添加订单按钮</lmButton>
     </div>
-  
+
 
 
     <div class="表格外">
       <lmSH></lmSH>
       <div class="表格">
-        <lmInput v-for="行 in pinia.显示的订单" :行=行></lmInput>
-        <lmButton @click="添加订单(pinia.新订单)" >
+        <lmInput v-for="行 in pinia.筛选过的旧订单" :行=行></lmInput>
+        <lmButton @click="添加订单(pinia.新订单)">
           <icon 图标名="icon-plus-circle-fill" 颜色="#fff" font-size='20px' />
           <p>添加订单</p>
         </lmButton>
         <p>{{pinia.新订单初始化}}</p>
-        <lmInput  :行=pinia.新订单 ></lmInput>
+        <lmInput :行=pinia.新订单></lmInput>
       </div>
 
     </div>
 
 
     <div class="分页整体">
-      <lmButton class="分页按钮"> 这是第{{ pinia.当前页 }}页</lmButton>
+      <lmButton class="分页按钮"> 这是第{{ pinia.旧订单当前页 }}页</lmButton>
       <!--      <button v-for = "(页, index) in pinia.页数" :key = "页" @click = 'pinia.当前页=pinia.页数[index]'>{{ 页 + 1 }}</button> -->
       <!-- v-for 循环数组必须有 index 且必须使用 不然循环不了  而且index不能用中文名 -->
       <div class="分页">
-        <lmButton :class="{ 查找状态: pinia.当前页  == 页 }" v-for="(页, index) in pinia.页数" @click="pinia.当前页 = index + 1">{{ 页 }}</lmButton>
+        <lmButton :class="{ 查找状态: pinia.旧订单当前页 == 页 }" v-for="(页, index) in pinia.旧订单页数" @click="pinia.旧订单当前页 = index + 1">
+          {{ 页 }}
+        </lmButton>
       </div>
-      <lmButton class="分页按钮">一共有{{ pinia.页数 }}页</lmButton>
+
+
+      <lmButton class="分页按钮">一共有{{ pinia.旧订单页数 }}页</lmButton>
     </div>
 
 
@@ -94,8 +92,7 @@ let 添加订单 = (行: any) => {
 
 
 <style scoped>
-
-.查找状态{
+.查找状态 {
   background-color: #337ecc;
 }
 
@@ -103,7 +100,7 @@ let 添加订单 = (行: any) => {
   display: grid;
   width: 100%;
   grid-auto-flow: row;
-  grid-template-rows: 50px  1fr auto;
+  grid-template-rows: 50px 1fr auto;
   grid-template-columns: 100%;
   align-content: start;
   align-items: start;

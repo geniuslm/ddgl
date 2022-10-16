@@ -49,13 +49,8 @@ let 添加订单 = (行: any) => {
 
     <div class="第一行">
       <!--   <div class = "弹窗" v-if = "添加订单窗口开关"> <lmButton @click = "添加订单窗口开关=false">关闭窗口</lmButton></div> -->
-
-      <h1>第五页-删除的订单{{pinia.日期}}</h1>
-
-
-      <lmButton>当前显示 {{ pinia.删除的订单.length }} 条数据</lmButton>
-
-
+      <h1>第五页-已删除的订单{{pinia.日期}}</h1>
+      <lmButton>当前显示 {{ pinia.已删除的订单.length }} 条数据</lmButton>
     </div>
   
 
@@ -64,7 +59,7 @@ let 添加订单 = (行: any) => {
       <lmSH></lmSH>
 
       <div class="表格">
-        <lmInput v-for="行 in pinia.删除的订单" :行=行></lmInput>
+        <lmInput v-for="行 in pinia.已删除的订单" :行=行></lmInput>
       </div>
     </div>
 

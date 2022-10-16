@@ -3,39 +3,51 @@ import { pinia数据中心 } from "../stores/pinia数据";
 import lmButton from "@组件/按钮.vue";
 import { reactive, ref } from "vue";
 
+import { useRouter } from 'vue-router';
 
-let 菜单列表 = [
-    {  目标页: "/", 内容: "主页", 图标: "icon-home" },
-    {  目标页: "/1", 内容: "图标页", 图标: "icon-star-fill" },
-    {  目标页: "/2", 内容: "第2测试页", 图标: "icon-question-circle" },
-    {  目标页: "/3", 内容: "3用户页", 图标: "icon-team" },
-    {  目标页: "/4", 内容: "4旧订单", 图标: "icon-filedone" },
-    {  目标页: "/5", 内容: "5删除单", 图标: "icon-question-circle" },
-    {  目标页: "/6", 内容: "第六测试", 图标: "icon-question-circle" },
-    {  目标页: "/7", 内容: "第七测试", 图标: "icon-question-circle" },
-    {  目标页: "/8", 内容: "第八测试", 图标: "icon-question-circle" },
-    {  目标页: "/9", 内容: "第九测试", 图标: "icon-question-circle" },
-    {  目标页: "/mr", 内容: "默认页", 图标: "icon-file" },
+let pinia = pinia数据中心();
+let 路由 = useRouter()
+let 跳转 = (路径: any) =>{
+    pinia.菜单当前页= 路径.内容
+    console.log(pinia.菜单当前页);
+    
+  路由.push(路径.路径);
+}
 
+let 菜单列表 = reactive([
 
-]
+    {  路径: "/1", 内容: "1图标页", 图标: "icon-star-fill" },
+    {  路径: "/2", 内容: "2未完成订单", 图标: "icon-question-circle" },
+    {  路径: "/3", 内容: "3用户页", 图标: "icon-team" },
+    {  路径: "/4", 内容: "4旧订单", 图标: "icon-filedone" },
+    {  路径: "/5", 内容: "5删除单", 图标: "icon-question-circle" },
+    {  路径: "/6", 内容: "第六测试", 图标: "icon-question-circle" },
+    {  路径: "/7", 内容: "第七测试", 图标: "icon-question-circle" },
+    {  路径: "/8", 内容: "第八测试", 图标: "icon-question-circle" },
+    {  路径: "/9", 内容: "第九测试", 图标: "icon-question-circle" },
+    {  路径: "/mr", 内容: "默认页", 图标: "icon-file" },
+
+])
 
 
 let 开关 = ref(true);
 
 
+
 </script>
 
 <template>
-    <div class="菜单" :style="[开关 ? ' width:  100px' : 'width: 50px']">
-        <lmButton v-for="按钮 in 菜单列表" :key="按钮.内容" :目标路径="按钮.目标页">
-            <!-- <icon v-if="!开关" :iconName="按钮.图标" color="#fff" font-size="30px" />
-            <icon v-if="开关" :iconName="按钮.图标" color="#fff" font-size="20px" /> -->
+    <div class="菜单" :style="[开关 ? ' width:  130px' : 'width: 50px']"   >
+
+        <button v-for="按钮,index in 菜单列表" :key="index"  @click="跳转(菜单列表[index])" :class="{当前:菜单列表[index].内容==pinia.菜单当前页}">
             <icon v-show="!开关" :图标名="按钮.图标" color="#fff" font-size="30px" />
             <icon v-show="开关" :图标名="按钮.图标" color="#fff" font-size="20px" />
             <p v-if="开关">{{ 按钮.内容 }}</p>
-        </lmButton>
-        <lmButton @click="开关 = !开关">{{ 开关 ? "开" : "关" }}</lmButton>
+        </button>
+
+
+
+        <button @click="开关 = !开关">{{ 开关 ? "开" : "关" }}</button>
         <div class="展开按钮" @click="开关 = !开关"></div>
     </div>
 </template>
@@ -56,6 +68,11 @@ let 开关 = ref(true);
     padding: 5px;
     transition: all 0.2s;
     position: relative;
+}
+
+.当前 {
+    background-color: #0a2947;
+
 }
 
 p {
@@ -79,5 +96,39 @@ p {
     height: 150px;
     border-radius: 15px;
     background-color: #337ecc;
+}
+
+button {
+  display           : grid;
+  grid-auto-flow    : column;
+  grid-template-rows: 1fr;
+  box-sizing        : border-box;
+  border            : 2px solid #409EFF;
+  width             : 100%;
+  border-radius     : 4px;
+  padding           : 4px 8px;
+  font-family       : Arial;
+  font-size         : 14px;
+  font-weight       : bold;
+  color             : #ffffff;
+  height            : 30px;
+  overflow          : hidden;
+  align-content     : center;
+  align-items       : center;
+  justify-content   : center;
+  justify-items     : center;
+  background-color  : #409EFF;
+  transition        : all 0.2s;
+}
+
+button:hover {
+
+  background-color: #79bbff;
+  border          : 2px solid #79bbff;
+}
+
+button:active {
+  background-color: #337ecc;
+  border          : 2px solid #337ecc;
 }
 </style>
