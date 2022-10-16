@@ -9,28 +9,28 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       当前登录用户: "",
       密码: "",
 
-      //新订单的数据
-      新订单: {
+      //新订单的默认数据
+      新订单模板: {
         类型: "新订单",
         删除信息: "",
         订单号: "",
-        年: "年",
-        月: "月",
-        日: "日",
-        镜片下单日: "镜片下单日",
-        旺旺名: "旺旺名",
-        收件人: "收件人",
-        镜片: "镜片",
+        年: "",
+        月: "",
+        日: "",
+        镜片下单日: "",
+        旺旺名: "",
+        收件人: "",
+        镜片: "",
 
-        右近视: "右近视",
-        右散光: "右散光",
-        右轴向: "右轴向",
-        左近视: "左近视",
-        左散光: "左散光",
-        左轴向: "左轴向",
-        瞳距: "瞳距",
+        右近视: "",
+        右散光: "",
+        右轴向: "",
+        左近视: "",
+        左散光: "",
+        左轴向: "",
+        瞳距: "",
 
-        备注: "备注",
+        备注: "",
 
       },
       //首行用的 搜索值与属性
@@ -61,16 +61,22 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       要显示的首行: [],
       用户: [],
       旧订单: [],
-      要搜索的值: "",
-      行的属性: "全局",
+      未完成订单: [],
+      要全局搜索的值: "",
+      排序的属性: "订单号",
+      排序的顺逆: 1,
+
+      菜单当前页: "1图标页",
 
 
-
-      正反: -1,
+      
       通过筛选的数量: 0,
-      页数: 1,
-      当前页: 1,
+      旧订单页数: 1,
+      旧订单当前页: 1,
       旧订单每页显示的数量: 150,
+      新订单页数: 1,
+      新订单当前页: 1,
+      新订单每页显示的数量: 150,
       添加订单窗口开关: false,
       日期: '',
 
@@ -92,16 +98,16 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
     //日期
     新订单初始化: (state) => {
       let date = new Date();
-      state.新订单.年 = date.getFullYear().toString().slice(2)
-      state.新订单.月 = ("0" + (date.getMonth() + 1)).slice(-2)
-      state.新订单.日 = ("0" + date.getDate()).slice(-2)
-      state.日期 = state.新订单.年 + "年" + state.新订单.月 + "月" + state.新订单.日 + "日"
+      state.新订单模板.年 = date.getFullYear().toString().slice(2)
+      state.新订单模板.月 = ("0" + (date.getMonth() + 1)).slice(-2)
+      state.新订单模板.日 = ("0" + date.getDate()).slice(-2)
+      state.日期 = state.新订单模板.年 + "年" + state.新订单模板.月 + "月" + state.新订单模板.日 + "日"
       let 订单号 = date.getFullYear().toString().slice(-2) + ("0" + (date.getMonth() + 2)).slice(-2) + ("0" + date.getDate()).slice(-2)
       let 今日订单数量: any = state.旧订单.filter((行: any) => {
         return String(行.订单号).indexOf(订单号) >= 0
       })
-      订单号 = 订单号 + ("0" + (今日订单数量.length + 3)).slice(-2)
-      state.新订单.订单号 = 订单号
+      订单号 = 订单号 + ("0" + (今日订单数量.length + 1)).slice(-2)
+      state.新订单模板.订单号 = 订单号
       return 订单号;
     },
 
@@ -115,7 +121,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
 
 
     //要显示 删除的订单的模块
-    删除的订单: (state) => {
+    已删除的订单: (state) => {
       return state.旧订单.filter((行: any) => {
         return 行.删除信息 !== ''&&行.删除信息.indexOf('彻底删除')  == -1
       })
@@ -123,7 +129,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
 
 
     //要显示的订单的新模块
-    显示的订单: (state) => {
+    筛选过的旧订单: (state) => {
       let 要显示的订单 = state.旧订单;
       let 要搜索的值 = state.旧订单搜索属性与值;
       let 序号: any
@@ -134,13 +140,10 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
 
       //搜素模块 
       //全局搜索
-      if (state.要搜索的值) {
+      if (state.要全局搜索的值) {
         要显示的订单 = state.旧订单.filter((行: any) => {       //过滤出要显示的订单           
           return Object.keys(行).some((key) => {   // key是行的每个属性名，some是检查行的属性是否有搜索的值
-            if (state.行的属性 == '全局')                 // 未赋值的key是遍历所有属性
-              return String(行[key]).indexOf(state.要搜索的值) > -1
-            key = state.行的属性                                         // 赋值的key是搜索的属性
-            return String(行[key]).indexOf(state.要搜索的值) > -1   // 如果行的key的值包含搜索值
+              return String(行[key]).indexOf(state.要全局搜索的值) > -1
           })
         })
       }
@@ -156,17 +159,17 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       state.通过筛选的数量 = 要显示的订单.length
 
 
-      //排序模块
+      //排序模块 根据排序的属性来排序
       要显示的订单 = 要显示的订单.sort((前一个值: any, 后一个值: any) => {
-        前一个值 = 前一个值[state.行的属性]
-        后一个值 = 后一个值[state.行的属性]
-        return (前一个值 >= 后一个值 ? 1 : -1) * state.正反  // 正反为-1时，升序，正反为1时，降序
+        前一个值 = 前一个值[state.排序的属性]
+        后一个值 = 后一个值[state.排序的属性]
+        return (前一个值 >= 后一个值 ? 1 : -1) * state.排序的顺逆  // 正反为-1时，升序，正反为1时，降序
       })
 
       //分页模块
-      state.页数 = Math.ceil(要显示的订单.length / state.旧订单每页显示的数量)
-      //分页模块
-      要显示的订单 = 要显示的订单.slice((state.当前页 - 1) * state.旧订单每页显示的数量, state.当前页 * state.旧订单每页显示的数量)
+      state.旧订单页数 = Math.ceil(要显示的订单.length / state.旧订单每页显示的数量)
+      
+      要显示的订单 = 要显示的订单.slice((state.旧订单当前页 - 1) * state.旧订单每页显示的数量, state.旧订单当前页 * state.旧订单每页显示的数量)
 
       return 要显示的订单
     }

@@ -1,23 +1,10 @@
 <script setup lang = "ts">
 import { useRouter } from 'vue-router';
 
-//接收参数
-const props = defineProps({
-  内容: {
-    type   : String,
-    default: 'LM按钮',
-  },
-  目标路径: {
-    type   : String,
-    default: '',
-  },
-})
-//路由
+
 let 路由 = useRouter()
 let 跳转 = (目标页: string) =>{
   路由.push(目标页);
-  
-
 }
 
 
@@ -25,7 +12,7 @@ let 跳转 = (目标页: string) =>{
 </script>
 
 <template>
-  <button @click = "跳转(目标路径)">
+  <button >
     <slot>LM按钮</slot>
   </button>
 </template>
