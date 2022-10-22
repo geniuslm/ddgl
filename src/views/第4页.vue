@@ -60,12 +60,12 @@ let 添加订单 = (行: any) => {
       <lmSH></lmSH>
       <div class="表格">
         <lmInput v-for="行 in pinia.筛选过的旧订单" :行=行></lmInput>
-        <lmButton @click="添加订单(pinia.新订单)">
+        <lmButton @click="添加订单(pinia.新订单模板)">
           <icon 图标名="icon-plus-circle-fill" 颜色="#fff" font-size='20px' />
           <p>添加订单</p>
         </lmButton>
         <p>{{pinia.新订单初始化}}</p>
-        <lmInput :行=pinia.新订单></lmInput>
+        <lmInput :行=pinia.新订单模板></lmInput>
       </div>
 
     </div>
