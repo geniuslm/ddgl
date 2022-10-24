@@ -1,36 +1,36 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { ref,toRefs,reactive } from 'vue';
+import { ref, toRefs, reactive } from 'vue';
 import Icon from './icons/Icon.vue';
 import { socket } from "../stores/socket链接";
 import { pinia数据中心 } from '../stores/pinia数据';
 
 let pinia = pinia数据中心();
 //接收参数
-let  {行 } =  defineProps({
+let { 行 } = defineProps({
   行: {
     type: Object,
     default: '空',
   }
 })
 
-let 显示开关=ref(true)
-let 修改开关=ref(false)
-let 新订单开关=ref(false)
-let 删除订单开关=ref(false)
-let 展开开关=ref(false)
+let 显示开关 = ref(true)
+let 修改开关 = ref(false)
+let 新订单开关 = ref(false)
+let 删除订单开关 = ref(false)
+let 展开开关 = ref(false)
 
- 
+
 // 新订单初始化
 if (行.类型 == '新订单') {
-  行.订单号=pinia.新订单初始化
-  新订单开关.value=true
-  显示开关.value=false
+  行.订单号 = pinia.新订单初始化
+  新订单开关.value = true
+  显示开关.value = false
 }
 // 删除订单初始化
 if (行.删除信息 !== '') {
-  显示开关.value=false
-  删除订单开关.value=true
+  显示开关.value = false
+  删除订单开关.value = true
 
 }
 
@@ -38,8 +38,8 @@ let 修改订单 = (行: any) => {
   socket.emit('修改与添加订单', 行, (返回数据: any) => {
     console.log(返回数据)
   });
-  修改开关.value =  false 
-  显示开关.value =  true
+  修改开关.value = false
+  显示开关.value = true
 }
 
 
@@ -52,14 +52,14 @@ let 添加订单 = (行: any) => {
 }
 
 let 删除订单 = (行: any) => {
-  行.删除信息 = pinia.当前登录用户+':'+pinia.日期+"删除"
+  行.删除信息 = pinia.当前登录用户 + ':' + pinia.日期 + "删除"
   socket.emit('修改与添加订单', 行, (返回数据: any) => {
     console.log(返回数据)
   });
 
 }
 let 彻底删除订单 = (行: any) => {
-  行.删除信息 = pinia.当前登录用户+':'+pinia.日期+'彻底删除'
+  行.删除信息 = pinia.当前登录用户 + ':' + pinia.日期 + '彻底删除'
   socket.emit('修改与添加订单', 行, (返回数据: any) => {
     console.log(返回数据)
   });
@@ -79,8 +79,8 @@ let 还原订单 = (行: any) => {
 </script>
 
 <template>
-
-  <div v-if="显示开关" class="行" > 
+  <!-- 默认显示的模块 -->
+  <div v-if="显示开关" class="行">
     <div>{{行.订单号}}</div>
     <div>{{行.年}}</div>
     <div>{{行.月}}</div>
@@ -97,13 +97,12 @@ let 还原订单 = (行: any) => {
     <div>{{行.左轴向}}</div>
     <div>{{行.右瞳距}}+{{行.左瞳距}} </div>
     <div>{{行.类型}}</div>
- 
-    <icon @click="展开开关=!展开开关, 显示开关=!显示开关 " 图标名="icon-setting" 颜色="#666" font-size='25px' />
+    <icon @click="展开开关=!展开开关, 显示开关=!显示开关 " 图标名="icon-down" 颜色="#666" font-size='25px' />
     <icon @click="修改开关=true,显示开关=false" 图标名="icon-setting" 颜色="#666" font-size='25px' />
-    <icon @click="删除订单(行)" 图标名="icon-delete" 颜色="#666" font-size='25px' />
+    <icon @click="删除订单(行)" 图标名="icon-delete" 颜色="#F56C6C" font-size='25px' />
   </div>
-
-  <div v-if="修改开关"  class="行">
+  <!-- 按修改之后显示的模块 -->
+  <div v-if="修改开关" class="行">
     <div>{{行.订单号}}</div>
     <div>{{行.年}}</div>
     <div>{{行.月}}</div>
@@ -122,27 +121,27 @@ let 还原订单 = (行: any) => {
     <input type="text" v-model.lazy="行.备注">
     <icon @click="修改订单(行)" 图标名="icon-cloud-upload" 颜色="#666" font-size='25px' />
   </div>
-
+  <!-- 新订单显示的模块 -->
   <div v-if="行.类型=='新订单'" class="行 ">
     <div>{{行.订单号}}</div>
     <div>{{行.年}}</div>
     <div>{{行.月}}</div>
     <div>{{行.日}}</div>
-    <input type="text" v-model.lazy="行.镜片下单日">
-    <input type="text" v-model.lazy="行.旺旺名">
-    <input type="text" v-model.lazy="行.收件人">
-    <input type="text" v-model.lazy="行.镜片">
-    <input type="text" v-model.lazy="行.右近视">
-    <input type="text" v-model.lazy="行.右散光">
-    <input type="text" v-model.lazy="行.右轴向">
-    <input type="text" v-model.lazy="行.左近视">
-    <input type="text" v-model.lazy="行.左散光">
-    <input type="text" v-model.lazy="行.左轴向">
-    <input type="text" v-model.lazy="行.瞳距">
-    <input type="text" v-model.lazy="行.备注">
+    <input type="text" v-model.lazy="行.镜片下单日" placeholder="镜片下单日">
+    <input type="text" v-model.lazy="行.旺旺名" placeholder="旺旺名">
+    <input type="text" v-model.lazy="行.收件人" placeholder="收件人">
+    <input type="text" v-model.lazy="行.镜片" placeholder="镜片">
+    <input type="text" v-model.lazy="行.右近视" placeholder="右近视">
+    <input type="text" v-model.lazy="行.右散光" placeholder="右散光">
+    <input type="text" v-model.lazy="行.右轴向" placeholder="右轴向">
+    <input type="text" v-model.lazy="行.左近视" placeholder="左近视">
+    <input type="text" v-model.lazy="行.左散光" placeholder="左散光">
+    <input type="text" v-model.lazy="行.左轴向" placeholder="左轴向">
+    <input type="text" v-model.lazy="行.瞳距" placeholder="瞳距">
+    <input type="text" v-model.lazy="行.备注" placeholder="备注">
   </div>
-
-  <div v-if="删除订单开关"  class="行"> 
+  <!-- 删除订单页的行 -->
+  <div v-if="删除订单开关" class="行">
     <div>{{行.订单号}}</div>
     <div>{{行.年}}</div>
     <div>{{行.月}}</div>
@@ -159,13 +158,12 @@ let 还原订单 = (行: any) => {
     <div>{{行.左轴向}}</div>
     <div>{{行.右瞳距}}+{{行.左瞳距}} </div>
     <div>{{行.删除信息}}</div>
-
-    <icon @click="还原订单(行)" 图标名="icon-setting" 颜色="#666" font-size='25px' />
-    <icon @click="彻底删除订单(行)" 图标名="icon-delete" 颜色="red" font-size='25px' />
+    <icon @click="还原订单(行)" 图标名="icon-reload" 颜色="#67C23A" font-size='25px' />
+    <icon @click="彻底删除订单(行)" 图标名="icon-delete" 颜色="#F56C6C" font-size='25px' />
   </div>
 
-
-  <div v-if="展开开关" class="行 高" > 
+  <!-- 展开后的行 -->
+  <div v-if="展开开关" class="行 高">
     <div>{{行.订单号}}</div>
     <div>{{行.年}}</div>
     <div>{{行.月}}</div>
@@ -182,13 +180,10 @@ let 还原订单 = (行: any) => {
     <div>{{行.左轴向}}</div>
     <div>{{行.右瞳距}}+{{行.左瞳距}} </div>
     <div>{{行.类型}}</div>
-
-    <icon @click="展开开关=!展开开关,显示开关=!显示开关" 图标名="icon-setting" 颜色="#666" font-size='25px' />
+    <icon @click="展开开关=!展开开关,显示开关=!显示开关" 图标名="icon-up" 颜色="#666" font-size='25px' />
     <icon @click="修改开关=true,显示开关=false" 图标名="icon-setting" 颜色="#666" font-size='25px' />
-    <icon @click="删除订单(行)" 图标名="icon-delete" 颜色="#666" font-size='25px' />
+    <icon @click="删除订单(行)" 图标名="icon-delete" 颜色="#F56C6C" font-size='25px' />
   </div>
-
-
 </template>
 
 
@@ -202,7 +197,7 @@ let 还原订单 = (行: any) => {
   background-color: #F0F2F5
 }
 
-.高{
+.高 {
   grid-template-rows: 150px;
 
 }
@@ -216,7 +211,7 @@ input {
   border-radius: 5px;
   background-color: #F0F2F5;
   margin: 0;
-} 
+}
 
 div {
 

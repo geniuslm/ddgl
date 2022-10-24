@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import lm菜单 from '@组件/菜单重写.vue';
+import lm菜单 from '@/components/菜单.vue';
 import lm内容 from '@组件/内容.vue';
 import lm头部 from '@组件/头部.vue';
 import { computed } from 'vue';
@@ -41,6 +41,7 @@ import { computed } from 'vue';
 
 .布局头 {
     display: grid;
+    grid-template-columns: 1fr;
     align-content: center;
     align-items: center;
     justify-content: center;

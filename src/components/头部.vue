@@ -32,7 +32,7 @@ pinia.新订单初始化
 
 <template>
   <div class="头部">
-    <lmButton @click="退出登录"> 退出登录</lmButton>
+    <div></div>
 
     <lmButton :class="{退出登录:pinia.当前数据库状态!='已连接'}"> 服务器 {{pinia.当前数据库状态}}</lmButton>
 
@@ -53,7 +53,8 @@ pinia.新订单初始化
 <style scoped>
 .头部 {
   display: grid;
-  grid-template-columns: auto;
+  width: 100%;
+  grid-template-columns: 5fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
   grid-auto-flow: column;
   align-content: center;
@@ -64,6 +65,7 @@ pinia.新订单初始化
 }
 
 .退出登录 {
-  background-color: red;
+  border:  #F56C6C;
+  background-color: #F56C6C;
 }
 </style>
