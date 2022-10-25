@@ -37,7 +37,7 @@ let 日期    = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.ge
 let 时间    = ref(date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds())  //获取日期与时间
 let month = ("0"+ (date.getMonth() + 1)).slice(-2)
 
-pinia.新订单.订单号 = date.getFullYear().toString().slice(-2) +("0"+ (date.getMonth() + 1)).slice(-2) 
+pinia.新订单模板.订单号 = date.getFullYear().toString().slice(-2) +("0"+ (date.getMonth() + 1)).slice(-2) 
 
 
 
@@ -49,7 +49,7 @@ pinia.新订单.订单号 = date.getFullYear().toString().slice(-2) +("0"+ (date
 
         <div class = "弹窗">
         <div class = "弹窗头">
-                <div>{{ 日期 }} {{ 时间 }} {{ pinia.新订单 }}</div>
+                <div>{{ 日期 }} {{ 时间 }} {{ pinia.新订单模板 }}</div>
                 <el-button @click = "pinia.添加订单窗口开关 = false" type = "danger">
 
                     <icon 图标名 = "icon-close-circle" 颜色 = "#FFFFFF" font-size = '30px' />
@@ -58,29 +58,29 @@ pinia.新订单.订单号 = date.getFullYear().toString().slice(-2) +("0"+ (date
             </div>
             <div class = "弹窗内部">
                 <div>
-                    <input type = "text" placeholder = "ID" v-model    = "pinia.新订单.订单号">
-                    <input type = "text" placeholder = "收件人" v-model   = "pinia.新订单.收件人">
-                    <input type = "text" placeholder = "旺旺名" v-model   = "pinia.新订单.旺旺名">
-                    <input type = "text" placeholder = "镜片下单日" v-model = "pinia.新订单.镜片下单日">
+                    <input type = "text" placeholder = "ID" v-model    = "pinia.新订单模板.订单号">
+                    <input type = "text" placeholder = "收件人" v-model   = "pinia.新订单模板.收件人">
+                    <input type = "text" placeholder = "旺旺名" v-model   = "pinia.新订单模板.旺旺名">
+                    <input type = "text" placeholder = "镜片下单日" v-model = "pinia.新订单模板.镜片下单日">
 
                    
-                    <input type = "text" placeholder = "备注" v-model = "pinia.新订单.备注">
+                    <input type = "text" placeholder = "备注" v-model = "pinia.新订单模板.备注">
 
 
                 </div>
                 <div>
                     <div class = "度数组">
 
-                        <input type = "text"  v-model = "pinia.新订单.右近视" placeholder = "右近视" class = "度数组内部">
-                        <input type = "text" v-model  = "pinia.新订单.右散光" placeholder = "右散光" class = "度数组内部">
-                        <input type = "text" v-model  = "pinia.新订单.右轴向" placeholder = "右轴向" class = "度数组内部">
+                        <input type = "text"  v-model = "pinia.新订单模板.右近视" placeholder = "右近视" class = "度数组内部">
+                        <input type = "text" v-model  = "pinia.新订单模板.右散光" placeholder = "右散光" class = "度数组内部">
+                        <input type = "text" v-model  = "pinia.新订单模板.右轴向" placeholder = "右轴向" class = "度数组内部">
            
 
                     </div>
                     <div   class = "度数组">
-                    <input type  = "text" v-model = "pinia.新订单.左近视" placeholder = "左近视" class = "度数组内部">
-                    <input type  = "text" v-model = "pinia.新订单.左散光" placeholder = "左散光" class = "度数组内部">
-                    <input type  = "text" v-model = "pinia.新订单.左轴向" placeholder = "左轴向" class = "度数组内部">
+                    <input type  = "text" v-model = "pinia.新订单模板.左近视" placeholder = "左近视" class = "度数组内部">
+                    <input type  = "text" v-model = "pinia.新订单模板.左散光" placeholder = "左散光" class = "度数组内部">
+                    <input type  = "text" v-model = "pinia.新订单模板.左轴向" placeholder = "左轴向" class = "度数组内部">
                   
                   
 

@@ -2,25 +2,20 @@
 import { pinia数据中心 } from '../stores/pinia数据';
 import lmInput from "@组件/行.vue";
 import lmSH from "@组件/首行.vue";
-import lmButton from "@组件/按钮.vue";
+import lmButton from "@组件/新版按钮.vue";
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia'
 
 
 let pinia = pinia数据中心();
 pinia.获取旧订单();
+let 提示 =()=>{
+  console.log("功能暂未开放")
+}
 
-
-//监控pinia
-// pinia.$subscribe((args: any) => {
-//     if (args.events.key !== "旧订单") {
-//         console.log('id', args.events.target._id)
-//         console.log('key', args.events.key)
-//         console.log('新值', args.events.newValue)
-//         console.log('旧值', args.events.oldValue)
-//     }
-
-// }, { detached: true })
+let 关闭提示 =()=>{
+    console.log("功关闭提示")
+}
 
 
 </script>
@@ -31,6 +26,9 @@ pinia.获取旧订单();
         <div class="第一行">
             <h1>第六页</h1>
         </div>
+    <lmButton    提示='集团范德萨解放了'   >获取旧订单</lmButton>
+
+
 
     </div>
 

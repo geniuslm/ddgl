@@ -54,7 +54,7 @@ pinia.新订单初始化
 .头部 {
   display: grid;
   width: 100%;
-  grid-template-columns: 5fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
   grid-auto-flow: column;
   align-content: center;
