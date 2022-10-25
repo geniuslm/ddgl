@@ -16,8 +16,8 @@ import { computed } from 'vue';
             <lm头部 />
         </div>
         <div class="布局中">
-            <lm菜单 />
-            <lm内容 />
+            <lm菜单   />
+            <lm内容 class="布局中内容" />
         </div>
         <div class="布局脚">
             <div></div>
@@ -35,8 +35,9 @@ import { computed } from 'vue';
     width: 100vw;
     background-color: #FFFFFF;
     gap: 5px;
-
     color: #000000;
+    overflow: hidden;
+    
 }
 
 .布局头 {
@@ -46,7 +47,8 @@ import { computed } from 'vue';
     align-items: center;
     justify-content: center;
     justify-items: center;
-    background-color: #F0F2F5
+    background-color: #F0F2F5;
+  
 }
 
 .布局中 {
@@ -58,9 +60,20 @@ import { computed } from 'vue';
     align-items: center;
     justify-content: center;
     justify-items: center;
-    overflow: auto;
-
+    overflow: visible;
 }
+.布局中内容 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: #F0F2F5;
+    overflow: visible;
+}
+
 
 .布局脚 {
     display: grid;

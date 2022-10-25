@@ -9,13 +9,6 @@ import { storeToRefs } from 'pinia'
 
 let pinia = pinia数据中心();
 pinia.获取旧订单();
-let 提示 =()=>{
-  console.log("功能暂未开放")
-}
-
-let 关闭提示 =()=>{
-    console.log("功关闭提示")
-}
 
 
 </script>
@@ -26,7 +19,10 @@ let 关闭提示 =()=>{
         <div class="第一行">
             <h1>第六页</h1>
         </div>
-    <lmButton    提示='集团范德萨解放了'   >获取旧订单</lmButton>
+    <lmButton  类型="默认"  提示='集团范德萨解放了'   ></lmButton>
+    <lmButton    提示='集团范德萨解放了'   ></lmButton>
+    <lmButton    提示='集团范德萨解放了'   ></lmButton>
+    <lmButton    提示='集团范德萨解放了'   ></lmButton>
 
 
 
@@ -39,11 +35,11 @@ let 关闭提示 =()=>{
 .第五页 {
     display: grid;
     grid-auto-flow: row;
-    grid-template-rows: 50px 50px 50px 1fr auto;
-    align-content: start;
+    grid-template-rows: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: start;
     background-color: #F0F2F5;
-    gap: 0px;
+    gap: 20px;
 }
 
 /* 滚动条整体 */

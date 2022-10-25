@@ -3,7 +3,7 @@
 import { pinia数据中心 } from '../stores/pinia数据';
 import { useRouter } from 'vue-router';
 import { socket } from "../stores/socket链接";
-import lmButton from "@组件/按钮.vue";
+import lmButton from "@组件/新版按钮.vue";
 import { ref } from 'vue';
 
 let pinia = pinia数据中心()
