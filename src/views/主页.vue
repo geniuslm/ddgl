@@ -71,7 +71,7 @@ import { computed } from 'vue';
     justify-content: center;
     justify-items: center;
     background-color: #F0F2F5;
-    
+    overflow: auto;
 }
 
 
