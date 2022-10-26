@@ -161,6 +161,7 @@ let 添加订单 = (行: any) => {
 .表格 {
   display: grid;
   grid-template-columns: 1fr;
+  height: 1fr;
   align-content: start;
   grid-auto-flow: row;
   overflow: auto;
@@ -172,6 +173,7 @@ let 添加订单 = (行: any) => {
   grid-template-columns: 1fr;
   align-content: start;
   grid-auto-flow: row;
+
   overflow: auto;
 }
 
