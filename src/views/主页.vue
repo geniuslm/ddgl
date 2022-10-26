@@ -60,7 +60,7 @@ import { computed } from 'vue';
     align-items: center;
     justify-content: center;
     justify-items: center;
-    overflow: visible;
+    overflow: auto;
 }
 .布局中内容 {
     display: grid;
@@ -71,7 +71,7 @@ import { computed } from 'vue';
     justify-content: center;
     justify-items: center;
     background-color: #F0F2F5;
-    overflow: visible;
+    
 }
 
 
