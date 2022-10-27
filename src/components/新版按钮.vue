@@ -1,7 +1,6 @@
 <script setup lang = "ts">
-import { createSimpleExpression } from '@vue/compiler-core';
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+
 
 let props = defineProps({
   类型: {
@@ -12,19 +11,47 @@ let props = defineProps({
     type: String,
     default: '没啥提示',
   },
+  颜色: {
+    type: String,
+    default: '默认',
+  },
 })
 let 文字 = ref('')
 let 显示提示 = ref(false)
 let 上显示提示 = ref(false)
+let 是否离开 = ref(false)
 let 类型 = ref('按钮')
-let 颜色 = ref('默认')
+
 
 //如果没有写提示 就不显示提示
-let 开关提示 = (开关: boolean, event: any) => {
+let 开提示 = (event: any) => 
+{    
+  if (props.提示 !== '没啥提示') 
+  {
+    是否离开.value = false;
+    setTimeout(() => 
+    {
+      if (是否离开.value == false)
+       {
+        if (window.innerHeight - event.target.getBoundingClientRect().y - event.target.getBoundingClientRect().height > 50) 
+        { 显示提示.value = true }
+        else
+         { 上显示提示.value = true }
+         console.log(是否离开.value)
+      }
+    },1000);
+  }
+}
+
+
+let 关提示 = (event: any) => {
   if (props.提示 !== '没啥提示') {
+    是否离开.value = true;
     setTimeout(() => {
-      if (window.innerHeight - event.target.getBoundingClientRect().y - event.target.getBoundingClientRect().height > 50) { 显示提示.value = 开关 }
-      else { 上显示提示.value = 开关 }
+      if (window.innerHeight - event.target.getBoundingClientRect().y - event.target.getBoundingClientRect().height > 50) 
+      { 显示提示.value = false }
+      else { 上显示提示.value = false }
+      console.log(是否离开.value)
     }, 1000);
   }
 }
@@ -44,13 +71,15 @@ let 打印位置 = (event: any) => {
 </script>
 
 <template>
-  <button :class="[类型, 颜色]" @mouseenter="开关提示(true, $event)" @mouseleave="开关提示(false, $event)">
+  <button :class="[类型, props.颜色]" @mouseenter="开提示($event)" @mouseleave="关提示($event)">
 
     <!-- props 传进来的内容 -->
     {{ 文字 }}
 
+
     <!-- 插槽模块 -->
     <slot></slot>
+
 
     <!-- 提示模块 -->
     <!-- 向下显示 -->
@@ -118,6 +147,21 @@ let 打印位置 = (event: any) => {
   border: 2px solid #337ecc;
 }
 
+.绿色 {
+  background-color: #67C23A;
+  border: 2px solid #67C23A;
+}
+
+.绿色:hover {
+  background-color: #85ce61;
+  border: 2px solid #85ce61;
+}
+
+.绿色:active {
+  background-color: #4e8e2f;
+  border: 2px solid #4e8e2f;
+}
+
 
 .提示 {
   position: absolute;
@@ -178,6 +222,7 @@ let 打印位置 = (event: any) => {
   top: -10px;
   z-index: 99;
 }
+
 .上尖角 {
   position: absolute;
   width: 0;
@@ -185,13 +230,13 @@ let 打印位置 = (event: any) => {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid #4b4b4bbe;
-  bottom:  -10px;
+  bottom: -10px;
   z-index: 99;
 }
 
 /* 提示生成的过度动画 */
 .提示-enter-active,
-.提示-leave-active  {
+.提示-leave-active {
   transition: all 0.8s ease;
 }
 
@@ -201,9 +246,10 @@ let 打印位置 = (event: any) => {
   transform: translateY(20px);
   opacity: 0;
 }
+
 /* 提示生成的过度动画 */
 .上提示-enter-active,
-.上提示-leave-active  {
+.上提示-leave-active {
   transition: all 0.8s ease;
 }
 
@@ -213,6 +259,4 @@ let 打印位置 = (event: any) => {
   transform: translateY(-20px);
   opacity: 0;
 }
-
-
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <svg :class="svgClass" aria-hidden="true" >
-        <use :xlink:href="iconClassName" :fill="颜色" />
+    <svg class="svg-icon" aria-hidden="true" >
+        <use :xlink:href="'#'+props.图标名" :fill="颜色" />
     </svg>
 </template>
 
@@ -16,19 +16,6 @@ const props = defineProps({
     颜色: { type: String, default: "currentColor" },
 });
 
-// 给图标添加名字
-const iconClassName = computed(() => {
-    return `#${props.图标名}`;
-});
-
-// 给图标添加上类名
-const svgClass = computed(() => {
-    if (props.图标类名) {
-        return `svg-icon ${props.图标类名}`;
-    }
-    return "svg-icon";
-});
-
 
 </script>
 
@@ -38,8 +25,6 @@ const svgClass = computed(() => {
     height: 1em;
     position: relative;
     fill: currentColor;
-    vertical-align: -2px;
-    transition: all 0.3s;
 }
 
 </style>

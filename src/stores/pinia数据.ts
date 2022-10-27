@@ -33,6 +33,27 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
         备注: "",
 
       },
+      新镜片模板: {
+        镜片名  : '',
+        品牌名  : '',
+        系列名  : '',
+        染色   : '',
+        变色   : '',
+        高散   : '',
+        车房   : '',
+        最高近视光: '',
+        最高散光光: '',
+        最高联合光: '',
+        最高远视光: '',
+        最高远视散: '',
+        供应商  : '',
+        售价   : '',
+        进货价  : '',
+        湖北和益 : '',
+        湖北蔡司 : '',
+        上海老周 : '',
+        丹阳臻视 : '',
+      },
       //首行用的 搜索值与属性
       旧订单搜索属性与值: [
         { 属性: '订单号', 值: '' },
@@ -61,6 +82,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       要显示的首行: [],
       用户: [],
       旧订单: [] as any[],
+      镜片数据: [] as any[],
       未完成订单: [],
       要全局搜索的值: "",
       排序的属性: "订单号",
@@ -69,7 +91,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       菜单当前页: "1图标页",
 
 
-      
+
       通过筛选的数量: 0,
       旧订单页数: 1,
       旧订单当前页: 1,
@@ -120,10 +142,11 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
     },
 
 
+
     //要显示 删除的订单的模块
     已删除的订单: (state) => {
       return state.旧订单.filter((行: any) => {
-        return 行.删除信息 !== ''&&行.删除信息.indexOf('彻底删除')  == -1
+        return 行.删除信息 !== '' && 行.删除信息.indexOf('彻底删除') == -1
       })
     },
 
@@ -143,7 +166,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       if (state.要全局搜索的值) {
         要显示的订单 = state.旧订单.filter((行: any) => {       //过滤出要显示的订单           
           return Object.keys(行).some((key) => {   // key是行的每个属性名，some是检查行的属性是否有搜索的值
-              return String(行[key]).indexOf(state.要全局搜索的值) > -1
+            return String(行[key]).indexOf(state.要全局搜索的值) > -1
           })
         })
       }
@@ -168,11 +191,16 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
 
       //分页模块
       state.旧订单页数 = Math.ceil(要显示的订单.length / state.旧订单每页显示的数量)
-      
+
       要显示的订单 = 要显示的订单.slice((state.旧订单当前页 - 1) * state.旧订单每页显示的数量, state.旧订单当前页 * state.旧订单每页显示的数量)
 
       return 要显示的订单
     }
+
+
+
+
+
   },
 
 
@@ -189,6 +217,12 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
     获取旧订单() {
       socket.emit('旧订单数据', (返回数据: any) => {
         this.旧订单 = 返回数据;
+        this.当前数据库状态 = "已连接"
+      })
+    },
+    获取镜片() {
+      socket.emit('镜片数据', (返回数据: any) => {
+        this.镜片数据 = 返回数据;
         this.当前数据库状态 = "已连接"
       })
     },

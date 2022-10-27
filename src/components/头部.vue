@@ -34,6 +34,7 @@ pinia.新订单初始化
   <div class="头部">
     <div></div>
 
+    <lmButton > {{pinia.菜单当前页}}</lmButton>
     <lmButton :class="{退出登录:pinia.当前数据库状态!='已连接'}"> 服务器 {{pinia.当前数据库状态}}</lmButton>
 
 

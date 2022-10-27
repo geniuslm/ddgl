@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { pinia数据中心 } from "../stores/pinia数据";
-import lmButton from "@组件/按钮.vue";
 import { reactive, ref } from "vue";
 
 import { useRouter } from 'vue-router';
@@ -22,8 +21,8 @@ let 菜单列表 = reactive([
     {  路径: "/4", 内容: "4旧订单", 图标: "icon-filedone" },
     {  路径: "/5", 内容: "5删除单", 图标: "icon-question-circle" },
     {  路径: "/6", 内容: "第六测试", 图标: "icon-question-circle" },
-    {  路径: "/7", 内容: "第七测试", 图标: "icon-question-circle" },
-    {  路径: "/8", 内容: "第八测试", 图标: "icon-question-circle" },
+    {  路径: "/7", 内容: "新订单录入", 图标: "icon-question-circle" },
+    {  路径: "/8", 内容: "镜片列表", 图标: "icon-question-circle" },
     {  路径: "/9", 内容: "第九测试", 图标: "icon-question-circle" },
     {  路径: "/mr", 内容: "默认页", 图标: "icon-file" },
 
