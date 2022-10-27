@@ -34,14 +34,8 @@ let Event = ref(0)
         {{Event}}
         <input type="text" name="myFruit" id="myFruit" list="mySuggestion">
         <datalist id="mySuggestion">
-            <option>Apple</option>
-            <option>Banana</option>
-            <option>Blackberry</option>
-            <option>Blueberry</option>
-            <option>Lemon</option>
-            <option>Lychee</option>
-            <option>Peach</option>
-            <option>Pear</option>
+            <option v-for="订单 in pinia.旧订单 ">{{订单.镜片}}</option>
+   
         </datalist>
         <input type="text"   list="mySuggestion">
         <lmButton     提示='按钮内容写插件里面吧'> 位置按钮</lmButton>
