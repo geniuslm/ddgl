@@ -53,20 +53,20 @@ let 开关 = ref(true);
 
 <style scoped>
 .菜单 {
-    display: grid;
-    box-sizing: border-box;
-    gap: 2px;
-    width: 100px;
+    display              : grid;
+    box-sizing           : border-box;
+    gap                  : 2px;
+    width                : 100px;
     grid-template-columns: 1fr;
-    grid-auto-flow: row;
-    align-content: start;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    background-color: #f0f2f5;
-    padding: 5px;
-    transition: all 0.2s;
-    position: relative;
+    grid-auto-flow       : row;
+    align-content        : start;
+    align-items          : center;
+    justify-content      : center;
+    justify-items        : center;
+    background-color     : #f0f2f5;
+    padding              : 5px;
+    transition           : all 0.2s;
+    position             : relative;
 }
 
 .当前 {
