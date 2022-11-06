@@ -11,28 +11,30 @@ import { onMounted, ref, toRef } from 'vue';
 let pinia = pinia数据中心();
 pinia.获取镜片();
 
+let 修改开关 = ref(false)
 
 let 修改镜片 = (行: any) => {
     socket.emit('修改与添加镜片', 行, (返回数据: any) => {
-        console.log('镜片名'+返回数据.镜片名+'修改成功')
-        pinia.获取镜片();
+        console.log('镜片名' + 返回数据.镜片名 + '修改成功')
     });
+    pinia.获取镜片();
+    修改开关.value = false
 }
 let 创建镜片 = (行: any) => {
     socket.emit('创建镜片', 行, (返回数据: any) => {
-        console.log('镜片名'+返回数据.镜片名+'创建成功')
+        console.log('镜片名' + 返回数据.镜片名 + '创建成功')
         pinia.获取镜片();
     });
 }
 let 复制镜片 = (行: any) => {
     socket.emit('创建镜片', 行, (返回数据: any) => {
-        console.log('镜片名'+返回数据.镜片名+'创建成功')
+        console.log('镜片名' + 返回数据.镜片名 + '创建成功')
         pinia.获取镜片();
     });
 }
 
 let 删除镜片 = (_id: any) => {
-    socket.emit('删除镜片',_id, (返回数据: any) => {
+    socket.emit('删除镜片', _id, (返回数据: any) => {
         console.log(返回数据)
         pinia.获取镜片();
     });
@@ -59,23 +61,24 @@ let 删除镜片 = (_id: any) => {
         <!-- 表格模块 -->
         <div class="表格外">
             <div class="表格">
-                <div v-for="行,k in pinia.镜片数据" :key="行._id" class="行">
-                    <div>{{行.镜片名}}</div>
-                    <div>{{行.品牌名}}</div>
-                    <div>{{行.系列名}}</div>
-                    <div>{{行.染色}}</div>
-                    <div>{{行.变色}}</div>
-                    <div>{{行.高散}}</div>
-                    <div>{{行.车房}}</div>
-                    <div>{{行.供应商}}</div>
-                    <div>{{行.售价}}</div>
-                    <div>{{行.进货价}}</div>
-                    <div>{{行.湖北和益}}</div>
-                    <div>{{行.湖北蔡司}}</div>
-                    <div>{{行.上海老周}}</div>
-                    <div>{{行.丹阳臻视}}</div>
-                    <icon @click="复制镜片(pinia.镜片数据[k])" 图标名="icon-file-copy" 颜色="#67C23A" font-size='25px' />
-                    <icon @click="删除镜片(pinia.镜片数据[k]._id)" 图标名="icon-delete" 颜色="#F56C6C" font-size='25px' />
+                <div v-for="行, k in pinia.镜片数据" :key="行._id" class="行">     
+                        <input v-model.lazy="行.镜片名">
+                        <input v-model="行.品牌名">
+                        <input v-model="行.系列名">
+                        <input v-model="行.染色">
+                        <input v-model="行.变色">
+                        <input v-model="行.高散">
+                        <input v-model="行.车房">
+                        <input v-model="行.供应商">
+                        <input v-model="行.售价">
+                        <input v-model="行.进货价">
+                        <input v-model="行.湖北和益">
+                        <input v-model="行.湖北蔡司">
+                        <input v-model="行.上海老周">
+                        <input v-model="行.丹阳臻视">
+                        <icon @click="修改镜片(pinia.镜片数据[k])" 图标名="icon-setting-fill" 颜色="#409EFF" font-size='25px' />
+                        <icon @click="复制镜片(pinia.镜片数据[k])" 图标名="icon-file-copy" 颜色="#67C23A" font-size='25px' />
+                        <icon @click="删除镜片(pinia.镜片数据[k]._id)" 图标名="icon-delete" 颜色="#F56C6C" font-size='25px' />               
                 </div>
             </div>
         </div>
@@ -86,12 +89,15 @@ let 删除镜片 = (_id: any) => {
         <!-- 添加新订单模块 -->
         <div class="添加订单">
             <div class="添加镜片">
-                <input v-model.lazy="pinia.新镜片模板.镜片名" placeholder="镜片名">
-                <input v-model.lazy="pinia.新镜片模板.品牌名" placeholder="品牌名" list="mySuggestion">
-                <input v-model.lazy="pinia.新镜片模板.系列名" placeholder="系列名">
-                <input v-model.lazy="pinia.新镜片模板.染色" placeholder="染色">
-                <input v-model.lazy="pinia.新镜片模板.变色" placeholder="变色">
-                <input v-model.lazy="pinia.新镜片模板.高散" placeholder="变色">
+                <div class="首行模块" v-for="k in pinia.新镜片属性">{{k}}</div>
+            </div>
+            <div class="添加镜片">
+                <!-- <input v-model.lazy="pinia.新镜片模板.镜片名" >
+                <input v-model.lazy="pinia.新镜片模板.品牌名"  list="mySuggestion">
+                <input v-model.lazy="pinia.新镜片模板.系列名"  >
+                <input v-model.lazy="pinia.新镜片模板.染色" >
+                <input v-model.lazy="pinia.新镜片模板.变色" >
+                <input v-model.lazy="pinia.新镜片模板.高散" >
                 <input v-model.lazy="pinia.新镜片模板.车房">
                 <input v-model.lazy="pinia.新镜片模板.供应商">
                 <input v-model.lazy="pinia.新镜片模板.售价">
@@ -99,10 +105,17 @@ let 删除镜片 = (_id: any) => {
                 <input v-model.lazy="pinia.新镜片模板.湖北和益">
                 <input v-model.lazy="pinia.新镜片模板.湖北蔡司">
                 <input v-model.lazy="pinia.新镜片模板.上海老周">
-                <input v-model.lazy="pinia.新镜片模板.丹阳臻视" placeholder="丹阳臻视">
-                <datalist id="mySuggestion">
-                    <option v-for="订单 in pinia.旧订单 ">{{ 订单.镜片 }}</option>
+                <input v-model.lazy="pinia.新镜片模板.丹阳臻视" > -->
+                <input  v-for="i,k in pinia.新镜片模板 " v-model.lazy="pinia.新镜片模板[k]"  :list=k >
+
+                <datalist id="品牌名">
+                    <option v-for="i in pinia.镜片品牌列表 ">{{ i }}</option>     
                 </datalist>
+                <datalist id="系列名">
+                    <option >哈哈</option>     
+                    <option >哈3 32哈</option>     
+                </datalist>
+           
             </div>
 
             {{ pinia.新镜片模板 }}
@@ -119,31 +132,40 @@ let 删除镜片 = (_id: any) => {
 
 
 <style scoped>
-.行{
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr 1fr  1fr;
-  grid-template-rows: 25px;
-  border-bottom: 1px solid rgb(139, 139, 139);
-  box-sizing: border-box;
-  background-color: #F0F2F5
+.行 {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 25px;
+
+    box-sizing: border-box;
+    background-color: #F0F2F5
 }
+
 .添加镜片 {
     display: grid;
-    background-color: rgba(87, 16, 16, 0.363);
+    background-color:  #66b1ff;
     grid-auto-flow: column;
-    grid-template-columns: repeat(14, 1fr);
+    grid-template-columns: repeat(19, 1fr);
     grid-template-rows: 1fr;
     width: 100%;
 }
 
 input {
     width: 100%;
-    height: 15px;
+    height: 20px;
     border: 1px solid rgb(122, 122, 122);
     border-radius: 5px;
     color: rgb(189, 40, 40);
-    font-size: 10px;
+    font-size: 15px;
+    text-align: center;
+}
+.首行模块 {
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    color: #262727;
+    font-size: 15px;
     text-align: center;
 }
 
