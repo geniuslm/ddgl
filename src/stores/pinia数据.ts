@@ -37,15 +37,15 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
         镜片名  : null,
         品牌名  : null,
         系列名  : null,
-        染色   : null,
-        变色   : null,
-        高散   : null,
-        车房   : null,
-        最高近视光: null,
-        最高散光光: null,
-        最高联合光: null,
-        最高远视光: null,
-        最高远视散: null,
+        折射率  : null,
+        染色变色   : null,
+        高散车房   : null,
+
+        最高近视光度: null,
+        最高散光光度: null,
+        最高联合光度: null,
+        最高远视光度: null,
+        最高远视散光: null,
         供应商  : null,
         售价   : null,
         进货价  : null,
@@ -88,7 +88,8 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       排序的属性: "订单号",
       排序的顺逆: 1,
 
-      菜单当前页: "1图标页",
+      菜单页面路径: window.location.pathname,
+      菜单页面名: window.location.pathname,
 
 
       
@@ -205,9 +206,9 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       要显示的订单 = 要显示的订单.slice((state.旧订单当前页 - 1) * state.旧订单每页显示的数量, state.旧订单当前页 * state.旧订单每页显示的数量)
 
       return 要显示的订单
-    }
+    },
 
-
+  
 
 
 
@@ -236,6 +237,9 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
         this.当前数据库状态 = "已连接"
       })
     },
+
+
+
   },
 });
 

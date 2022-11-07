@@ -7,11 +7,12 @@ import { useRouter } from 'vue-router';
 let pinia = pinia数据中心();
 let 路由 = useRouter()
 let 跳转 = (路径: any) =>{
-    pinia.菜单当前页= 路径.内容
-    console.log(pinia.菜单当前页);
-    
-  路由.push(路径.路径);
+
+    pinia.菜单页面路径= 路径.路径
+    pinia.菜单页面名= 路径.内容
+    路由.push(路径.路径);
 }
+
 
 let 菜单列表 = reactive([
 
@@ -38,7 +39,7 @@ let 开关 = ref(true);
 <template>
     <div class="菜单" :style="[开关 ? ' width:  130px' : 'width: 50px']"   >
 
-        <button v-for="按钮,index in 菜单列表" :key="index"  @click="跳转(菜单列表[index])" :class="{当前:菜单列表[index].内容==pinia.菜单当前页}">
+        <button v-for="按钮,index in 菜单列表" :key="index"  @click="跳转(菜单列表[index])" :class="{当前:菜单列表[index].路径==pinia.菜单页面路径}">
             <icon v-show="!开关" :图标名="按钮.图标" color="#fff" font-size="30px" />
             <icon v-show="开关" :图标名="按钮.图标" color="#fff" font-size="20px" />
             <p v-if="开关">{{ 按钮.内容 }}</p>

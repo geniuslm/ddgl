@@ -75,7 +75,6 @@ let 还原订单 = (行: any) => {
 
 
 
-
 </script>
 
 <template>
@@ -107,9 +106,9 @@ let 还原订单 = (行: any) => {
     <div>{{行.年}}</div>
     <div>{{行.月}}</div>
     <div>{{行.日}}</div>
-    <input type="text" v-model.lazy="行.镜片下单日">
-    <input type="text" v-model.lazy="行.旺旺名">
-    <input type="text" v-model.lazy="行.收件人">
+    <input type="text" v-model.lazy="行.镜片下单日" >
+    <input type="text" v-model.lazy="行.旺旺名" >
+    <input type="text" v-model.lazy="行.收件人" >
     <input type="text" v-model.lazy="行.镜片">
     <input type="text" v-model.lazy="行.右近视">
     <input type="text" v-model.lazy="行.右散光">
@@ -188,6 +187,7 @@ let 还原订单 = (行: any) => {
 
 
 <style scoped>
+
 .行 {
   display: grid;
   grid-auto-flow: column;
