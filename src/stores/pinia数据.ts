@@ -24,6 +24,7 @@ export class 订单类 {
   备注 = "";
 }
 
+
 export class 镜片类 {
   // 镜片哈名= "";
   // 品牌名= "";
@@ -127,6 +128,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       用户: [],
       旧订单: [] as any[],
       镜片数据: [] as any[],
+      新订单数据表: [] as any[],
       未完成订单: [],
       要全局搜索的值: "",
       排序的属性: "订单号",
@@ -281,6 +283,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
         this.当前数据库状态 = "已连接"
       })
     },
+
 
 
 
