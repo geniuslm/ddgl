@@ -24,7 +24,7 @@ socket.on("disconnect", () => {
   console.log("数据库链接断开");
 });
 
-let 退出 = ref(true)
+let 推出登录样式 = ref(true)
 
 pinia.新订单初始化
 
@@ -46,7 +46,7 @@ pinia.新订单初始化
     <lmButton>当前用户:{{pinia.当前登录用户}}
 
     </lmButton>
-    <lmButton :class="{退出登录:退出}" @click="退出登录">
+    <lmButton :class="{退出登录:推出登录样式}" @click="退出登录">
       <icon 图标名="icon-close-circle" 颜色="#fff" font-size='23px' /> 退出登录
     </lmButton>
   </div>

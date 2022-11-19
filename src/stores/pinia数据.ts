@@ -1,6 +1,50 @@
 import { defineStore } from "pinia";
 import { socket } from "./socket链接";
 
+export class 订单类 {
+  类型 = "新订单";
+  删除信息 = "";
+  订单号 = "";
+  年 = "";
+  月 = "";
+  日 = "";
+  镜片下单日 = "";
+  旺旺名 = "";
+  收件人 = "";
+  镜片 = "";
+
+  右近视 = "";
+  右散光 = "";
+  右轴向 = "";
+  左近视 = "";
+  左散光 = "";
+  左轴向 = "";
+  瞳距 = "";
+
+  备注 = "";
+}
+
+export class 镜片类 {
+  // 镜片哈名= "";
+  // 品牌名= "";
+  // 系列名= "";
+  // 折射率= "";
+  // 染色变色= "";
+  // 高散车房= "";
+
+  // 最高近视光度= "";
+  // 最高散光光度= "";
+  // 最高联合光度= "";
+  // 最高远视光度= "";
+  // 最高远视散光= "";
+  // 供应商= "";
+  // 售价= "";
+  // 进货价= "";
+  // 湖北和益= "";
+  // 湖北蔡司= "";
+  // 上海老周= "";
+  // 丹阳臻视= "";
+}
 
 export const pinia数据中心 = defineStore("pinia数据中心", {
   state: () => {
@@ -34,25 +78,25 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
 
       },
       新镜片模板: {
-        镜片名  : null,
-        品牌名  : null,
-        系列名  : null,
-        折射率  : null,
-        染色变色   : null,
-        高散车房   : null,
+        镜片名: null,
+        品牌名: null,
+        系列名: null,
+        折射率: null,
+        染色变色: null,
+        高散车房: null,
 
         最高近视光度: null,
         最高散光光度: null,
         最高联合光度: null,
         最高远视光度: null,
         最高远视散光: null,
-        供应商  : null,
-        售价   : null,
-        进货价  : null,
-        湖北和益 : null,
-        湖北蔡司 : null,
-        上海老周 : null,
-        丹阳臻视 : null,
+        供应商: null,
+        售价: null,
+        进货价: null,
+        湖北和益: null,
+        湖北蔡司: null,
+        上海老周: null,
+        丹阳臻视: null,
       },
       //首行用的 搜索值与属性
       旧订单搜索属性与值: [
@@ -78,7 +122,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
 
       ],
 
-  
+
       要显示的首行: [],
       用户: [],
       旧订单: [] as any[],
@@ -92,7 +136,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       菜单页面名: window.location.pathname,
 
 
-      
+
       通过筛选的数量: 0,
       旧订单页数: 1,
       旧订单当前页: 1,
@@ -109,16 +153,16 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
 
   //计算属性
   getters: {
-    镜片品牌列表:(state)=>{
-      let 品牌列表 = []as any[]
-      state.镜片数据.forEach((镜片)=>{
-        if(品牌列表.indexOf(镜片.品牌名) == -1){
+    镜片品牌列表: (state) => {
+      let 品牌列表 = [] as any[]
+      state.镜片数据.forEach((镜片) => {
+        if (品牌列表.indexOf(镜片.品牌名) == -1) {
           品牌列表.push(镜片.品牌名)
         }
       })
       return 品牌列表
     },
-    新镜片属性:(state)=>Object.keys(state.新镜片模板),
+    新镜片属性: (state) => Object.keys(state.新镜片模板),
     //通过旧订单的首行来计算 首行的属性数组
     旧订单的所有属性: (state) => {
       let 属性
@@ -208,7 +252,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
       return 要显示的订单
     },
 
-  
+
 
 
 
