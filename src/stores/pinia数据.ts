@@ -46,6 +46,13 @@ export class 镜片类 {
   // 上海老周= "";
   // 丹阳臻视= "";
 }
+export class 用户蓝图 {
+  ID=""
+  用户名 = "";
+  密码 = "";
+  手机号 = "";
+  __v = 0;
+}
 
 export const pinia数据中心 = defineStore("pinia数据中心", {
   state: () => {
@@ -122,9 +129,11 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
         { 属性: '备注', 值: '' },
 
       ],
+      测试新用户:new 用户蓝图(),
 
 
       要显示的首行: [],
+      测试列表: [] as any[],
       用户: [],
       旧订单: [] as any[],
       镜片数据: [] as any[],
