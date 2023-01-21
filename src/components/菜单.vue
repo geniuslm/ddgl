@@ -26,6 +26,7 @@ let 菜单列表 = reactive([
     {  路径: "/8", 内容: "镜片列表", 图标: "icon-question-circle" },
     {  路径: "/9", 内容: "第九测试", 图标: "icon-question-circle" },
     {  路径: "/10", 内容: "第十测试", 图标: "icon-question-circle" },
+    {  路径: "/11", 内容: "第十一页", 图标: "icon-filedone" },
     {  路径: "/mr", 内容: "默认页", 图标: "icon-file" },
 
 ])

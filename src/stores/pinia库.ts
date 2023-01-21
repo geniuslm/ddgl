@@ -47,18 +47,19 @@ export class 镜片类 {
   // 丹阳臻视= "";
 }
 export class 用户蓝图 {
-  ID=""
+  ID = ""
   用户名 = "";
   密码 = "";
   手机号 = "";
   __v = 0;
 }
 
-export const pinia数据中心 = defineStore("pinia数据中心", {
+export const pinia库 = defineStore("pinia库", {
   state: () => {
     return {
- 
-      订单表11:[] as any[],
+      测试数据: [{"哈哈":11}, {"哈哈":22}, {"哈哈":33}],
+      测试数: "哈哈1",
+      订单表11: [] as any[],
       当前数据库状态: "未连接",
       当前登录用户: "",
       密码: "",
@@ -131,7 +132,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
         { 属性: '备注', 值: '' },
 
       ],
-      测试新用户:new 用户蓝图(),
+      测试新用户: new 用户蓝图(),
 
 
       要显示的首行: [],
@@ -299,6 +300,7 @@ export const pinia数据中心 = defineStore("pinia数据中心", {
     获取订单表11() {
       socket.emit('旧订单数据', (返回数据: any) => {
         this.订单表11 = 返回数据;
+        this.订单表11 = this.订单表11.slice(1, 10)
         this.当前数据库状态 = "已连接"
       })
     },

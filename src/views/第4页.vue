@@ -25,11 +25,11 @@ let 添加订单按钮 = () => {
 
 
 
-let 添加订单 = (行: any) => {
-  socket.emit('修改与添加订单', 行, (返回数据: any) => {
+let 创建订单 = (行: any) => {
+  socket.emit('创建订单', 行, (返回数据: any) => {
     console.log(返回数据)
   });
-  console.log('添加订单');
+  console.log('创建订单');
   pinia.获取旧订单();
   pinia.旧订单当前页 = pinia.旧订单页数
 }
@@ -81,7 +81,7 @@ let 添加订单 = (行: any) => {
     <!-- 添加新订单模块 -->
     <div class="添加订单">
       <lmInput :行=pinia.新订单模板></lmInput>
-      <lmButton @click="添加订单(pinia.新订单模板)">
+      <lmButton @click="创建订单(pinia.新订单模板)">
         <icon 图标名="icon-plus-circle-fill" 颜色="#fff" font-size='20px' />
         <p>添加订单</p>
       </lmButton>

@@ -10,6 +10,7 @@ import 第7页 from '@页面/第7页.vue';
 import 第8页 from '@页面/第8页.vue';
 import 第9页 from '@页面/第9页.vue';
 import 第10页 from '@页面/第10页.vue';
+import 第11页 from '@页面/第11页.vue';
 import 默认页 from '@页面/默认页.vue';
 import 登录页 from '@页面/登录页.vue';
 import { pinia数据中心 } from '../stores/pinia数据';
@@ -102,8 +103,12 @@ const router = createRouter({
                     components: { 内容: 第10页 },
                     props: true
                 },
-
-
+                {
+                    path: '11',
+                    name: '第11页',
+                    components: { 内容: 第11页 },
+                    props: true
+                },
             ],
         },
 
